@@ -22,14 +22,6 @@ pipeline {
             }
         }
 
-        stage('Gradle Build') {
-            steps {
-                script {
-                    sh 'chmod +x gradlew'
-                    sh './gradlew clean build --offline '
-                }
-            }
-        }
     }
 
     post {
