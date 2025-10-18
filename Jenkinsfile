@@ -19,7 +19,7 @@ pipeline {
                          sh """
                             if [ ! -d .git ]; then
                                 git init
-                                git remote add origin git@github.com:ums-messaging/ums.git
+                                git remote add origin git@github.com:ums-messaging/eureka-server.git
                                 git pull origin $GIT_BRANCH
                             else
                                 git fetch origin $GIT_BRANCH
