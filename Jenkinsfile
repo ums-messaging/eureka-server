@@ -13,11 +13,9 @@ pipeline {
     stages {
         stage('Checkout Eureka Server') {
             steps {
-                dir('eureka-server') {
-                    def branch = env.BRANCH_NAME ?: 'main'
-                    sshagent(['ums']) {
-                          sh "git clone -b ${branch} git@github.com:ums-messaging/ums.git"
-                    }
+                def branch = env.BRANCH_NAME ?: 'main'
+                sshagent(['ums']) {
+                    sh "git clone -b ${branch} git@github.com:ums-messaging/ums.git"
                 }
             }
         }
