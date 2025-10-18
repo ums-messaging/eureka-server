@@ -16,7 +16,7 @@ pipeline {
                  script {
                     def branch = env.BRANCH_NAME ?: 'main'
                     sshagent(['github-ssh-key']) {
-                        sh "git clone -b ${branch} git@github.com:ums-messaging/ums.git"
+                        sh "git clone -b ${branch} git@github.com:ums-messaging/eureka-server.git"
                     }
                  }
             }
