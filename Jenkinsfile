@@ -14,7 +14,7 @@ pipeline {
         stage('Checkout Eureka Server') {
             steps {
                 dir('eureka-server') {
-                    sshagent(['github-ssh-key']) {
+                    sshagent(['ums']) {
                         sh """
                             if [ ! -d .git ]; then
                                 git init
