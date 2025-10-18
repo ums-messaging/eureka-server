@@ -11,26 +11,16 @@ pipeline {
     }
 
     stages {
-        stage('Checkout Eureka Server') {
-            steps {
-                dir('eureka-server') {
-                    sshagent(['ums']) {
-                        sh """
-                            if [ ! -d .git ]; then
-                                git init
-                                git remote add origin git@github.com:ums-messaging/eureka-server.git
-                                git config core.sparseCheckout true
-                                echo "eureka-server/*" > .git/info/sparse-checkout
-                                git pull origin $GIT_BRANCH
-                            else
-                                git fetch origin $GIT_BRANCH
-                                git checkout $GIT_BRANCH
-                                git pull origin $GIT_BRANCH
-                            fi
-                        """
+         stage('Checkout') {
+                    steps {
+                        script {
+                            def branch = env.BRANCH_NAME ?: 'main'
+                            sshagent(['github-ssh-key']) {
+                                sh "git clone -b ${branch} git@github.com:ums-messaging/ums.git"
+                            }
+                        }
                     }
                 }
-            }
         }
 
         stage('Gradle Build') {
