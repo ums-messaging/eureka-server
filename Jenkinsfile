@@ -24,7 +24,7 @@ pipeline {
 
         stage('Gradle Build') {
             steps {
-                dir('eureka-server') {
+                script {
                     sh 'chmod +x gradlew'
                     sh './gradlew clean build --offline '
                 }
