@@ -1,8 +1,19 @@
-plugins {
-    id 'java'
-    id 'org.springframework.boot' version '3.5.6'
-    id 'io.spring.dependency-management' version '1.1.7'
+buildscript {
+    repositories {
+        maven {
+            url "http://localhost:8081/repository/maven-public/"
+            allowInsecureProtocol = true
+        }
+    }
+    dependencies {
+        classpath "org.springframework.boot:spring-boot-gradle-plugin:3.5.6"
+        classpath "io.spring.gradle:dependency-management-plugin:1.1.7"
+    }
 }
+
+apply plugin: 'java'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
 
 group = 'com.ums'
 version = '0.0.1-SNAPSHOT'
@@ -21,19 +32,22 @@ configurations {
 }
 
 repositories {
-    mavenCentral()
+    maven {
+        url "http://localhost:8081/repository/maven-public/"
+        allowInsecureProtocol = true
+    }
 }
 
 ext {
-    set('springCloudVersion', "2025.0.0")
+    springCloudVersion = "2025.0.0"
 }
 
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-server'
     compileOnly 'org.projectlombok:lombok'
-    developmentOnly 'org.springframework.boot:spring-boot-devtools'
     annotationProcessor 'org.projectlombok:lombok'
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
@@ -45,5 +59,7 @@ dependencyManagement {
 }
 
 tasks.named('test') {
-    useJUnitPlatform()
+    configure {
+        useJUnitPlatform()
+    }
 }
