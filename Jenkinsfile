@@ -44,7 +44,7 @@ pipeline {
         stage('Docker Build') {
             steps {
                 sh '''
-                    docker build -t ${REGISTRY_URL}/${APP_NAME}:${IMAGE_TAG} .
+                    docker build -t ${REGISTRY}/${APP_NAME}:${IMAGE_TAG} .
                     docker push ${REGISTRY_URL}/${APP_NAME}:${IMAGE_TAG} .
                 '''
             }
