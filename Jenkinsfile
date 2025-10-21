@@ -44,7 +44,6 @@ pipeline {
         stage('Docker Build') {
             steps {
                 sh '''
-                    usermod -aG docker jenkins
                     docker build -t ${REGISTRY_URL}/${APP_NAME}:${IMAGE_TAG} .
                     docker push ${REGISTRY_URL}/${APP_NAME}:${IMAGE_TAG} .
                 '''
