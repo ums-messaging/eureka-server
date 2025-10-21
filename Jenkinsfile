@@ -35,7 +35,7 @@ pipeline {
             steps {
                 script {
                     sh 'chmod +x gradlew'
-                    sh './gradlew clean build '
+                    sh './gradlew build --refresh-dependencies'
                 }
             }
         }
