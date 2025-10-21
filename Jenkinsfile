@@ -45,6 +45,7 @@ pipeline {
             steps {
                 sh '''
                     docker build -t ${REGISTRY}/${APP_NAME}:${IMAGE_TAG} .
+                    애찯ㄱ ㅣㅐ햐ㅜ ${REGISTRY} --username jang314 --password jang314
                     docker push ${REGISTRY}/${APP_NAME}:${IMAGE_TAG}
                 '''
             }
