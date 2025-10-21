@@ -45,8 +45,19 @@ pipeline {
             steps {
                 sh '''
                     docker build -t ${REGISTRY}/${APP_NAME}:${IMAGE_TAG} .
-                    docker ${REGISTRY} --username jang314 --password jang314
+                    docker login ${REGISTRY} --username jang314 --password jang314
                     docker push ${REGISTRY}/${APP_NAME}:${IMAGE_TAG}
+                '''
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                sh '''
+                    aws ssm start-session --target i-0e4be789103dd9f68
+                    docker login ${REGISTRY} --username jang314 --password jang314
+                    docker pull ${REGISTRY}/${APP_NAME}:${IMAGE_TAG}
+                    docker run -d --name ${APP_NAME} -p 8761:8761 --restart always ${REGISTRY}/${APP_NAME}:${IMAGE_TAG}
                 '''
             }
         }
