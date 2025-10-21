@@ -1,7 +1,7 @@
 buildscript {
     repositories {
         maven {
-            url "http://10.0.0.132:8081/repository/maven-public/"
+            url "http://localhost:8081/repository/maven-public/"
             allowInsecureProtocol = true
         }
     }
@@ -33,7 +33,7 @@ configurations {
 
 repositories {
     maven {
-        url "http://10.0.0.132:8081/repository/maven-public/"
+        url "http://localhost:8081/repository/maven-public/"
         allowInsecureProtocol = true
     }
 }
