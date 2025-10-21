@@ -35,7 +35,7 @@ pipeline {
             steps {
                 script {
                     sh 'chmod +x gradlew'
-                    sh './gradlew clean build --offline '
+                    sh './gradlew clean build '
                 }
             }
         }
