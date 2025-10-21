@@ -54,7 +54,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 script {
-                    def command = [
+                    def commands = [
                         "docker login ${REGISTRY} --username jang314 --password jang314",
                         "docker pull ${REGISTRY}/${APP_NAME}:${IMAGE_TAG}",
                         "docker stop ${APP_NAME} || true",
