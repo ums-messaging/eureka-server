@@ -2,11 +2,11 @@ pipeline {
     agent any
 
     environment {
+        AWS_REGION = 'ap-northeast-2'
+        TARGET_INSTANCE_ID = 'i-0e4be789103dd9f68'
         REGISTRY = "registry.ums.local:5000"
         APP_NAME = "eureka-server"
         IMAGE_TAG = "${env.BUILD_NUMBER}"
-        DEPLOY_HOST = "10.0.0.134"
-        SSH_KEY = "ums-key.pem"
         GIT_BRANCH = "${env.BRANCH_NAME ?: 'main'}"
     }
 
@@ -54,10 +54,18 @@ pipeline {
         stage('Deploy') {
             steps {
                 sh '''
-                    aws ssm start-session --target i-0e4be789103dd9f68
-                    docker login ${REGISTRY} --username jang314 --password jang314
-                    docker pull ${REGISTRY}/${APP_NAME}:${IMAGE_TAG}
-                    docker run -d --name ${APP_NAME} -p 8761:8761 --restart always ${REGISTRY}/${APP_NAME}:${IMAGE_TAG}
+                 aws ssm send-command \
+                     --targets "Key=instanceIds,Values=${TARGET_INSTANCE_ID}" \
+                     --document-name "AWS-RunShellScript" \
+                     --region ${AWS_REGION} \
+                     --comment "Deploy ${APP_NAME}" \
+                     --parameters 'commands=[
+                        "docker login ${REGISTRY} --username jang314 --password jang314"
+                        "docker pull ${REGISTRY_URL}/${APP_NAME}:${IMAGE_TAG}",
+                        "docker stop ${APP_NAME} || true",
+                        "docker rm ${APP_NAME} || true",
+                        "docker run -d --name ${APP_NAME} -p 8761:8761 ${REGISTRY}/${APP_NAME}:${IMAGE_TAG}"
+                    ]'
                 '''
             }
         }
