@@ -69,7 +69,7 @@ pipeline {
                             --document-name "AWS-RunShellScript" \
                             --region ${AWS_REGION} \
                             --comment "Deploy ${APP_NAME}" \
-                            --parameters '{commands = [
+                            --parameters '{"commands" = [
                                "docker login ${REGISTRY} --username jang314 --password jang314",
                                "docker pull ${REGISTRY}/${APP_NAME}:${IMAGE_TAG}",
                                "docker stop ${APP_NAME} || true",
