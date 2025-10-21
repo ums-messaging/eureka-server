@@ -45,7 +45,7 @@ pipeline {
             steps {
                 sh '''
                     docker build -t ${REGISTRY}/${APP_NAME}:${IMAGE_TAG} .
-                    docker push ${REGISTRY}/${APP_NAME}:${IMAGE_TAG} .
+                    docker push ${REGISTRY}/${APP_NAME}:${IMAGE_TAG}
                 '''
             }
         }
