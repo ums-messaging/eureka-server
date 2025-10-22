@@ -66,6 +66,7 @@ pipeline {
                     sh """
                         aws ssm send-command \
                             --instance-ids "${TARGET_INSTANCE_ID}" \
+                            --targets "Key=instanceIds,Values=${TARGET_INSTANCE_ID}" \
                             --document-name "AWS-RunShellScript" \
                             --region ${AWS_REGION} \
                             --comment "Deploy ${APP_NAME}" \
