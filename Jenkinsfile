@@ -15,7 +15,7 @@ pipeline {
             steps {
                  script {
                     def branch = env.BRANCH_NAME ?: 'main'
-                    sshagent(['ums']) {
+                    sshagent(['git']) {
                          sh """
                             if [ ! -d .git ]; then
                                 git init
