@@ -6,9 +6,10 @@ spring:
     name: eureka-server
 eureka:
   instance:
-    hostname: ip-10-0-0-136.ap-northeast-2.compute.internal
+    hostname: eureka-server
   client:
     register-with-eureka: false
     fetch-registry: false
     service-url:
       defaultZone: http://${eureka.instance.hostname}:8761/eureka/
+      
