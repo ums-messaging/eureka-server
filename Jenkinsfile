@@ -75,7 +75,7 @@ pipeline {
                                "docker pull ${REGISTRY}/${APP_NAME}:${IMAGE_TAG}",
                                "docker stop ${APP_NAME} || true",
                                "docker rm ${APP_NAME} || true",
-                               "docker run -d --name ${APP_NAME} -p 8761:8761 ${REGISTRY}/${APP_NAME}:${IMAGE_TAG}"
+                               "docker run -d --name ${APP_NAME} -p 8761:8761 --add-host=config-server:10.0.0.141 --add-host=kafka:10.0.0.137 ${REGISTRY}/${APP_NAME}:${IMAGE_TAG}"
                             ]}'
                     """
                  }

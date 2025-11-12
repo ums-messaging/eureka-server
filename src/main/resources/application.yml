@@ -4,6 +4,10 @@ server:
 spring:
   application:
     name: eureka-server
+  proviles:
+    active: dev
+  config:
+    import: optional:configserver:http://config-server:8888
 eureka:
   instance:
     hostname: eureka-server
