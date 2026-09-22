@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         AWS_REGION = 'ap-northeast-2'
-        TARGET_INSTANCE_ID = 'i-0e4be789103dd9f68'
+        TARGET_INSTANCE_ID = 'i-089a1f71d13dd5301'
         REGISTRY = "registry.ums.local:5000"
         APP_NAME = "eureka-server"
         IMAGE_TAG = "${env.BUILD_NUMBER}"
