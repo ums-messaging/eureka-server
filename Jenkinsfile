@@ -34,7 +34,6 @@ pipeline {
         stage('Gradle Build') {
             steps {
                 script {
-                    sh 'nohup aws ssm start-session --target i-00464ff35252824cb --document-name AWS-StartPortForwardingSession --parameters "portNumber=8081,localPortNumber=8081" > ~/ssm-session.log 2>&1 &'
                     sh 'chmod +x gradlew'
                     sh './gradlew build --refresh-dependencies'
                 }
